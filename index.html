@@ -245,7 +245,7 @@ footer { margin-top:48px; border-top:1px solid var(--rule); padding-top:16px; fo
 </div>
 
 <script>
-const BCRA = "https://api.bcra.gob.ar/centraldedeudores/v1.0";
+const PROXY = "https://validador-cuit.onrender.com";
 const SIT_LABELS = {1:"Normal",2:"Riesgo bajo",3:"Riesgo medio",4:"Riesgo alto",5:"Irrecuperable",6:"Irrecup. disp. tecnica"};
 let cuitActual = "";
 let checks = {deudas:null,cheques:null,afip:null,bo:null};
@@ -319,7 +319,7 @@ async function consultarDeudas(cuit) {
   ct.innerHTML="";
 
   try {
-    const res = await fetch(BCRA+"/Deudas/"+cuit, {});
+    const res = await fetch(PROXY+"/"+cuit, {});
 
     if(res.status===404||res.status===204){
       st.className="status-banner ok";
@@ -393,7 +393,7 @@ async function consultarCheques(cuit) {
   ct.innerHTML="";
 
   try {
-    const res = await fetch(BCRA+"/Deudas/ChequesRechazados/"+cuit, {});
+    const res = await fetch(PROXY+"/"+cuit+"/cheques", {});
 
     if(res.status===404||res.status===204){
       st.className="status-banner ok";
